@@ -1,4 +1,7 @@
+import { Layout } from './Layout';
 import { ClickHandler } from './utils';
-const myButton = document.querySelector('.button');
-myButton.addEventListener('click', ClickHandler);
-console.log('test', );
+const main = document.querySelector('main');
+main.innerHTML = Layout();
+
+const button = document.querySelector('button');
+button.addEventListener('click', ClickHandler)
