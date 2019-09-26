@@ -9,7 +9,7 @@ module.exports = {
   // Webpack needs to know where to start the bundling process,
   // so we define the main JS and Sass files, both under
   // the './src' directory
-  entry: ['./src/scripts/site.js', './src/styles/styles.scss'],
+  entry: ['./src/js/site.js', './src/css/styles.scss'],
   // This is where we define the path where Webpack will place
   // the bundled JS file
   output: {
@@ -20,7 +20,7 @@ module.exports = {
     publicPath: '/assets',
     // The name of the output bundle. Path is also relative
     // to the output path
-    filename: 'assets/scripts/bundle.js'
+    filename: 'assets/js/bundle.js'
   },
   module: {
     // Array of rules that tells Webpack how the modules (output)
@@ -66,9 +66,22 @@ module.exports = {
         ]
       },
       {
+        test: /\.(woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              publicPath: '../css/fonts',
+              emitFile: false
+            }
+          }
+        ]
+      },
+      {
         // Adds support to load images in your CSS rules. It looks
         // for .png, .jpg, .jpeg and .gif
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(svg|png|jpe?g|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -82,7 +95,7 @@ module.exports = {
               // url('../../public/assets/images/venice-italy.jpg')
               // and when generating the CSS file, it will be
               // outputted as url(../images/venice-italy.jpg), which
-              // is relative to /styles/main.css
+              // is relative to /css/main.css
               publicPath: '../images',
               // When this option is 'true', the loader will emit
               // the image to output.path
@@ -94,11 +107,8 @@ module.exports = {
     ]
   },
   plugins: [
-    // Configuration options for MiniCssExtractPlugin. Here I'm only
-    // indicating what the CSS outputted file name should be and
-    // the location
     new MiniCssExtractPlugin({
-      filename: 'assets/styles/styles.css'
+      filename: 'assets/css/styles.css'
     })
   ]
 };

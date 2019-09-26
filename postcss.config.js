@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = {
     plugins: [
       postcssPresetEnv({
-        browsers: ['> 1%']
+        browsers: ["> 0.25%", "IE 10"]
       }),
       require('cssnano')
     ]
